@@ -93,19 +93,6 @@ class DTAMP(nn.Module):
             min_q_pi = critic.min_q(batch['observations'], pi, batch['g_critic'])
             actor_loss = -self.rl_coeff * min_q_pi.mean() / min_q_pi.abs().mean().detach() + bc_loss
             return actor_loss
-        
-    def compute_actor_loss2(self, batch, warmup):
-        goals = batch['g_actor'][:, 1:]
-        observations = batch['observations'][:, :-1]
-        pi = self.actor(observations, goals)
-        bc_loss = (pi - batch['actions'][:, :-1, :]).pow(2).mean()
-        if warmup:
-            return bc_loss
-        else:
-            critic = deepcopy(self.critic)
-            min_q_pi = critic.min_q(batch['observations'], pi, batch['g_critic'])
-            actor_loss = -self.rl_coeff * min_q_pi.mean() / min_q_pi.abs().mean().detach() + bc_loss
-            return actor_loss
 
     def compute_critic_loss(self, batch):
         g_neg = self.sample_negative_goals(batch)
