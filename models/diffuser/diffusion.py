@@ -142,7 +142,7 @@ class GaussianDiffusion(nn.Module):
                 x_start=x_recon, x_t=x, t=t)
         return model_mean, posterior_variance, posterior_log_variance
 
-    # @torch.no_grad()
+    @torch.no_grad()
     def p_sample(self, x, cond, t, returns=None):
         b, *_, device = *x.shape, x.device
         model_mean, _, model_log_variance = self.p_mean_variance(x=x, cond=cond, t=t, returns=returns)
@@ -151,7 +151,7 @@ class GaussianDiffusion(nn.Module):
         nonzero_mask = (1 - (t == 0).float()).reshape(b, *((1,) * (len(x.shape) - 1)))
         return model_mean + nonzero_mask * (0.5 * model_log_variance).exp() * noise
 
-    # @torch.no_grad()
+    @torch.no_grad()
     def p_sample_loop(self, shape, cond, returns=None, verbose=True, return_diffusion=False):
         device = self.betas.device
 
@@ -186,6 +186,14 @@ class GaussianDiffusion(nn.Module):
         return self.p_sample_loop(shape, cond, returns, *args, **kwargs)
 
     def grad_p_sample(self, x, cond, t, returns=None):
+        b, *_, device = *x.shape, x.device
+        model_mean, _, model_log_variance = self.p_mean_variance(x=x, cond=cond, t=t, returns=returns)
+        noise = 0.5*torch.randn_like(x)
+        # no noise when t == 0
+        nonzero_mask = (1 - (t == 0).float()).reshape(b, *((1,) * (len(x.shape) - 1)))
+        return model_mean + nonzero_mask * (0.5 * model_log_variance).exp() * noise
+
+    def grad_p_sample2(self, x, cond, t, returns=None):
         b, *_, device = *x.shape, x.device
         model_mean, _, model_log_variance = self.p_mean_variance(x=x, cond=cond, t=t, returns=returns)
         noise = 0.5*torch.randn_like(x)
