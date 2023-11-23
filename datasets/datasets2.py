@@ -19,6 +19,10 @@ class D4RLDataset(Dataset):
             start = end + 1
         self.max_interval = max_interval
         self.horizon = horizon
+        self.max_interval = max_interval
+        self.horizon = horizon
+        self.max_interval = max_interval
+        self.horizon = horizon
 
     def __len__(self):
         return int(1e6)
