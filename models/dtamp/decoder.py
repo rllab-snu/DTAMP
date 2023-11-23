@@ -18,7 +18,6 @@ class Decoder(nn.Module):
         state = state.reshape(-1, *batch_shape[-1:])
         hidden = self.fc1(state)
         hidden = hidden.view(-1, 1024, 1, 1)
-        hidden = hidden.ravel(2)
         hidden = F.relu(self.conv1(hidden))
         hidden = F.relu(self.conv2(hidden))
         hidden = F.relu(self.conv3(hidden))
