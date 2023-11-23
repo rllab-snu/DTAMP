@@ -7,7 +7,7 @@ This is an official GitHub Repository for paper
 - training:
   
   - ```bash
-    cd {dtamp}
-    source PYTHONPATH=$PYTHONPATH:/{path_to_dtamp}/dtamp
+    cd DTAMP
+    source PYTHONPATH=$PYTHONPATH:/{path_to_dtamp}/DTAMP
     python scripts/train_dtamp.py
     ```
