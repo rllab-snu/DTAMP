@@ -12,13 +12,13 @@ class Decoder(nn.Module):
         self.conv3 = nn.ConvTranspose2d(64, 32, 6, stride=2)
         self.conv4 = nn.ConvTranspose2d(32, 16, 6, stride=2)
         self.conv5 = nn.ConvTranspose2d(16, 3, 2, stride=2)
-        self.conv6 = nn.ConvTranspose2d(16, 3, 2, stride=2)
 
     def forward(self, state):
         batch_shape = state.shape
         state = state.reshape(-1, *batch_shape[-1:])
         hidden = self.fc1(state)
         hidden = hidden.view(-1, 1024, 1, 1)
+        hidden = hidden.ravel(2)
         hidden = F.relu(self.conv1(hidden))
         hidden = F.relu(self.conv2(hidden))
         hidden = F.relu(self.conv3(hidden))
