@@ -63,8 +63,7 @@ class DTAMP(nn.Module):
         batch['g_critic'] = self.critic.encode(batch['observations'])
         batch['g'] = torch.cat([batch['g_actor'], batch['g_critic']], dim=-1)
 
-        # actor_loss = self.compute_actor_loss(batch, warmup)
-        actor_loss = self.compute_actor_loss2(batch, warmup)
+        actor_loss = self.compute_actor_loss(batch, warmup)
         critic_loss = self.compute_critic_loss(batch)
         diffuser_loss = self.compute_diffuser_loss(batch)
         loss = actor_loss + critic_loss + self.diffuser_coeff * diffuser_loss
@@ -74,6 +73,7 @@ class DTAMP(nn.Module):
 
         logs = {
             'loss': loss,
+            'decoder_loss': decoder_loss,
             'actor_loss': actor_loss,
             'critic_loss': critic_loss,
             'diffuser_loss': diffuser_loss,
