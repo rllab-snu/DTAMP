@@ -91,19 +91,6 @@ class LatentDiffusion(nn.Module):
         posterior_log_variance_clipped = extract(self.posterior_log_variance_clipped, t, x_t.shape)
         return posterior_mean, posterior_variance, posterior_log_variance_clipped
 
-    def q_posterior2(self, x_start, x_t, t):
-        # posterior_mean = (
-        #     extract(self.posterior_mean_coef1, t, x_t.shape) * x_start +
-        #     extract(self.posterior_mean_coef2, t, x_t.shape) * x_t
-        # )
-        posterior_mean = (
-            extract(self.posterior_mean_coef1, t) * x_start +
-            extract(self.posterior_mean_coef2, t, x_t.shape) * x_t
-        )
-        posterior_variance = extract(self.posterior_variance, t, x_t.shape)
-        posterior_log_variance_clipped = extract(self.posterior_log_variance_clipped, t, x_t.shape)
-        return posterior_mean, posterior_variance, posterior_log_variance_clipped
-
     def p_mean_variance(self, x, cond, t, returns=None):
         if self.returns_condition:
             # epsilon could be epsilon or x0 itself
@@ -125,7 +112,7 @@ class LatentDiffusion(nn.Module):
                 x_start=x_recon, x_t=x, t=t)
         return model_mean, posterior_variance, posterior_log_variance
 
-    @torch.no_grad()
+    # @torch.no_grad()
     def p_sample(self, x, cond, t, returns=None):
         b, *_, device = *x.shape, x.device
         model_mean, _, model_log_variance = self.p_mean_variance(x=x, cond=cond, t=t, returns=returns)
@@ -134,7 +121,7 @@ class LatentDiffusion(nn.Module):
         nonzero_mask = (1 - (t == 0).float()).reshape(b, *((1,) * (len(x.shape) - 1)))
         return model_mean + nonzero_mask * (0.5 * model_log_variance).exp() * noise
 
-    @torch.no_grad()
+    # @torch.no_grad()
     def p_sample_loop(self, shape, cond, returns=None, verbose=True, return_diffusion=False):
         device = self.betas.device
 
