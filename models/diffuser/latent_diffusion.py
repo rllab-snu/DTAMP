@@ -92,8 +92,12 @@ class LatentDiffusion(nn.Module):
         return posterior_mean, posterior_variance, posterior_log_variance_clipped
 
     def q_posterior2(self, x_start, x_t, t):
+        # posterior_mean = (
+        #     extract(self.posterior_mean_coef1, t, x_t.shape) * x_start +
+        #     extract(self.posterior_mean_coef2, t, x_t.shape) * x_t
+        # )
         posterior_mean = (
-            extract(self.posterior_mean_coef1, t, x_t.shape) * x_start +
+            extract(self.posterior_mean_coef1, t) * x_start +
             extract(self.posterior_mean_coef2, t, x_t.shape) * x_t
         )
         posterior_variance = extract(self.posterior_variance, t, x_t.shape)
