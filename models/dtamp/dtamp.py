@@ -73,7 +73,6 @@ class DTAMP(nn.Module):
 
         logs = {
             'loss': loss,
-            'decoder_loss': decoder_loss,
             'actor_loss': actor_loss,
             'critic_loss': critic_loss,
             'diffuser_loss': diffuser_loss,
@@ -83,6 +82,19 @@ class DTAMP(nn.Module):
         return loss, logs
 
     def compute_actor_loss(self, batch, warmup):
+        goals = batch['g_actor'][:, 1:]
+        observations = batch['observations'][:, :-1]
+        pi = self.actor(observations, goals)
+        bc_loss = (pi - batch['actions'][:, :-1, :]).pow(2).mean()
+        if warmup:
+            return bc_loss
+        else:
+            critic = deepcopy(self.critic)
+            min_q_pi = critic.min_q(batch['observations'], pi, batch['g_critic'])
+            actor_loss = -self.rl_coeff * min_q_pi.mean() / min_q_pi.abs().mean().detach() + bc_loss
+            return actor_loss
+        
+    def compute_actor_loss2(self, batch, warmup):
         goals = batch['g_actor'][:, 1:]
         observations = batch['observations'][:, :-1]
         pi = self.actor(observations, goals)
