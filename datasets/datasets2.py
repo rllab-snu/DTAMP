@@ -24,7 +24,6 @@ class D4RLDataset(Dataset):
         return int(1e6)
 
     def __getitem__(self, item):
-        print(item)
         epi_i = np.random.randint(len(self.episode_lengths))
         length = self.episode_lengths[epi_i]
         max_interval = np.minimum(self.max_interval, length // (self.horizon - 1))
@@ -33,6 +32,7 @@ class D4RLDataset(Dataset):
         timesteps = t + interval * np.arange(self.horizon)
         batch = {
             'observations': torch.as_tensor(self.episodes['observations'][epi_i][timesteps], dtype=torch.float32),
-            'actions': torch.as_tensor(self.episodes['actions'][epi_i][timesteps], dtype=torch.float32)
+            'actions': torch.as_tensor(self.episodes['actions'][epi_i][timesteps], dtype=torch.float32),
+            'item': item
         }
         return batch
