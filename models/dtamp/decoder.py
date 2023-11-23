@@ -12,6 +12,7 @@ class Decoder(nn.Module):
         self.conv3 = nn.ConvTranspose2d(64, 32, 6, stride=2)
         self.conv4 = nn.ConvTranspose2d(32, 16, 6, stride=2)
         self.conv5 = nn.ConvTranspose2d(16, 3, 2, stride=2)
+        self.conv6 = nn.ConvTranspose2d(16, 3, 2, stride=2)
 
     def forward(self, state):
         batch_shape = state.shape
