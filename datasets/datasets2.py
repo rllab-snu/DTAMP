@@ -21,10 +21,10 @@ class D4RLDataset(Dataset):
         self.horizon = horizon
 
     def __len__(self):
-        # return int(1e6)
-        return int(1e4)
+        return int(1e6)
 
     def __getitem__(self, item):
+        print(item)
         epi_i = np.random.randint(len(self.episode_lengths))
         length = self.episode_lengths[epi_i]
         max_interval = np.minimum(self.max_interval, length // (self.horizon - 1))
