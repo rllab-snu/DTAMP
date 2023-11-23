@@ -128,7 +128,8 @@ class GaussianDiffusion(nn.Module):
             epsilon_uncond = self.model(x, cond, t, returns, force_dropout=True)
             epsilon = epsilon_uncond + self.condition_guidance_w*(epsilon_cond - epsilon_uncond)
         else:
-            epsilon = self.model(x, cond, t)
+            # epsilon = self.model(x, cond, t)
+            epsilon = self.model(x, cond, t, t)
 
         t = t.detach().to(torch.int64)
         x_recon = self.predict_start_from_noise(x, t=t, noise=epsilon)
