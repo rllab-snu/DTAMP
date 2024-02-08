@@ -58,4 +58,4 @@ year={2023}
 ```
 
 ## Contact
-If you have any problem, please contact to [mineui.hong@rllab.snu.ac.kr](mineui.hong@rllab.snu.ac.kr).
+If you have any problem, please contact to <mineui.hong@rllab.snu.ac.kr>.
