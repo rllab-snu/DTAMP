@@ -25,5 +25,5 @@ python scripts/d4rl/train_dtamp.py --env {env_name}
 ```
 To train DTAMP for the CALVIN benchmark, first run ```preprocess_calvin_data.py``` for preprocessing the dataset:
 ```bash
-python scripts/calvin/preprocess_calvin_data.py --source_data_dir {where}/{tacorl_data}/{saved} --target_data_dir {where}/{to save}/{processed data}
+python scripts/calvin/preprocess_calvin_data.py --source_data_dir {where}/{tacorl_data}/{saved} --target_data_dir {where}/{to_save}/{processed_data}
 ```
