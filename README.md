@@ -27,3 +27,7 @@ To train DTAMP for the CALVIN benchmark, first run ```preprocess_calvin_data.py`
 ```bash
 python scripts/calvin/preprocess_calvin_data.py --source_data_dir {where}/{tacorl_data}/{saved} --target_data_dir {where}/{to_save}/{processed_data}
 ```
+Then, you should train PlayLMP model first to learn skill representations:
+```bash
+python scripts/calvin/train_lmp.py --data_dir {where}/{processed_data}/{saved}; python scripts/calvin/add_skills_to_calvin_dataset.py --data_dir {where}/{processed_data}/{saved}
+```
