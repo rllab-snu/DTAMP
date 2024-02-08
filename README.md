@@ -15,6 +15,7 @@ which has slightly different training/validation split.
 
 ### 2. Training
 
+Before running the scripts, you should set PYTHONPATH.
 ```bash
 export PYTHONPATH=$PYTHONPATH:/{path}/{to}/{dtamp}
 ```
