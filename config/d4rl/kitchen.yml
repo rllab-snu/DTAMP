@@ -1,0 +1,26 @@
+# Model Configurations
+goal_dim: 64
+horizon: 16
+max_interval: 16
+n_critics: 4
+rl_coeff: 2.5
+kl_coeff: 0
+decoder_coeff: 0
+diffuser_coeff: 0.001
+predict_epsilon: True
+diffuser_timesteps: 200
+returns_condition: False
+goal_condition: True
+condition_guidance_w: 0.
+hidden_size: 512
+
+# Training Configurations
+batch_size: 32
+learning_rate: 0.0002
+warmup_updates: 50000
+updates_per_epoch: 10000
+epochs: 100
+
+# Evaluation Configurations
+threshold: 0.5
+time_limit: 10

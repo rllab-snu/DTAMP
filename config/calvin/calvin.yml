@@ -1,0 +1,42 @@
+# Model Configurations
+goal_dim: 64
+horizon: 16
+max_interval: 16
+n_critics: 4
+rl_coeff: 0.05
+kl_coeff: 0
+decoder_coeff: 50.
+diffuser_coeff: 0.001
+predict_epsilon: True
+diffuser_timesteps: 300
+returns_condition: False
+condition_guidance_w: 0.
+hidden_size: 512
+
+# Training Configurations
+batch_size: 32
+learning_rate: 0.0001
+warmup_updates: 50000
+updates_per_epoch: 10000
+epochs: 100
+
+# Evaluation Configurations
+threshold: 0.1
+time_limit: 32
+skill_duration: 16
+
+#Play-LMP Configurations
+lmp_cfg:
+  goal_dim: 32
+  action_dim: 7
+  skill_dim: 16
+  kl_coeff: 0.001
+  kl_balance_coeff: 0.2
+
+  min_skill_length: 8
+  max_skill_length: 16
+
+  batch_size: 32
+  learning_rate: 0.0001
+  updates_per_epoch: 10000
+  epochs: 30
