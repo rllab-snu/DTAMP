@@ -35,3 +35,27 @@ Now you can finally train DTAMP:
 ```bash
 python scripts/calvin/train_dtamp.py --data_dir {where}/{processed_data}/{saved} --lmp_dir {where}/{lmp_checkpoint}/{saved}
 ```
+
+### 3. Evaluation
+
+To evaluate the trained model, run:
+```bash
+python scripts/d4rl/evaluate_dtamp.py --env {env_name} --checkpoint_dir {checkpoint}/{dir}
+```
+or
+```bash
+python scripts/calvin/evaluate_dtamp.py --calvin_dir {calvin_env}/{root}/{pth} --data_dir {where}/{data}/{saved} --checkpoint_dir {checkpoint}/{dir} --tasks_per_rollout {1 or 2 or 3}
+```
+
+## Reference
+```bash
+@inproceedings{hong2023dtamp,
+author={Mineui Hong and Minjae Kang and Songhwai Oh},
+title={Diffused Task-Agnostic Milestone Planner},
+journal={Proceedings of the 37th Conference on Neural Information Processing Systems (NeurIPS)},
+year={2023}
+}
+```
+
+## Contact
+If you have any problem, please contact to [mineui.hong@rllab.snu.ac.kr](mineui.hong@rllab.snu.ac.kr).
