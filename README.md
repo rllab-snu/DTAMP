@@ -12,3 +12,9 @@ We recommend you to install the D4RL environments from [D4RL repo](https://githu
 and CALVIN benchmark from [CALVIN repo](https://github.com/mees/calvin).  
 We also note that we utilize dataset provided by [TACO-RL repo](https://github.com/ErickRosete/tacorl) for CALVIN experiments,
 which has slightly different training/validation split.
+
+### 2. Training
+
+```bash
+export PYTHONPATH=$PYTHONPATH:/{path}/{to}/{dtamp}
+```
