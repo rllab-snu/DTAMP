@@ -59,3 +59,6 @@ year={2023}
 
 ## Contact
 If you have any problem, please contact to <mineui.hong@rllab.snu.ac.kr>.
+
+## Acknowledgements
+The codebase of diffusion model is based on [decision-diffuser repo](https://github.com/anuragajay/decision-diffuser/tree/main/code) and [diffuser repo](https://github.com/jannerm/diffuser/)
