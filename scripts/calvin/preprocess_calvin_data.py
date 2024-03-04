@@ -35,7 +35,7 @@ new_hard_start_end_tasks = dict()
 split = json.load(open(os.path.join(args.source_data_dir, 'split.json'), 'r'))
 os.makedirs(args.target_data_dir, exist_ok=True)
 
-copy_tree(os.path.join(args.source_data_dir, '.hydra'), os.path.join(args.target_data_dir, '.hydra'))
+# copy_tree(os.path.join(args.source_data_dir, '.hydra'), os.path.join(args.target_data_dir, '.hydra'))
 
 for field, start_end_idxs in split.items():
     for i, (start_idx, end_idx) in enumerate(tqdm(start_end_idxs, desc=f'Processing {field} data...')):
