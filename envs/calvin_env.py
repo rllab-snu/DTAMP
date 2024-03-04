@@ -10,7 +10,7 @@ import json
 
 
 class CalvinEnv:
-    def __init__(self, calvin_dir, data_dir, show_gui=False, max_step=None):
+    def __init__(self, calvin_dir, data_dir, config_dir, show_gui=False, max_step=None):
         sys.path.append(os.path.join(calvin_dir, 'calvin_env'))
         sys.path.append(os.path.join(calvin_dir, 'calvin_models'))
         self.task_cfg = OmegaConf.load(
@@ -19,7 +19,7 @@ class CalvinEnv:
         self.task_oracle = hydra.utils.instantiate(self.task_cfg)
 
         from calvin_env.envs.play_table_env import get_env
-        self.env = get_env(data_dir, show_gui=show_gui)
+        self.env = get_env(config_dir, show_gui=show_gui)
         self.obs_shape = (3, 128, 128)
         self.act_dim = 7
         self.goal_state = None
