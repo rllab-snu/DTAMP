@@ -51,6 +51,7 @@ if __name__ == '__main__':
     parser.add_argument('--eval_episodes', type=int, default=100)
     parser.add_argument('--calvin_dir', type=str, default=None)
     parser.add_argument('--data_dir', type=str, default=None)
+    parser.add_argument('--config_dir', type=str, default='config/calvin')
     parser.add_argument('--checkpoint_dir', type=str, default=None)
     parser.add_argument('--checkpoint_epoch', type=int, default=None)
     parser.add_argument('--tasks_per_rollout', type=int, default=1)
@@ -70,7 +71,7 @@ if __name__ == '__main__':
 
     config = yaml.load(open('config/calvin/calvin.yml'), Loader=yaml.FullLoader)
 
-    env = CalvinEnv(args.calvin_dir, args.data_dir, show_gui=args.render)
+    env = CalvinEnv(args.calvin_dir, args.data_dir, args.config_dir, show_gui=args.render)
 
     action_dim = env.act_dim
     device = torch.device('cuda')
