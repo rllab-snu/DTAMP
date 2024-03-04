@@ -10,6 +10,8 @@ This is an official GitHub Repository for the paper:
 Please note that the installation of the D4RL environments and CALVIN benchmark are not included in `requirements.txt`.  
 We recommend you to install the D4RL environments from [D4RL repo](https://github.com/Farama-Foundation/D4RL),
 and CALVIN benchmark from [CALVIN repo](https://github.com/mees/calvin).  
+However, installing D4RL environments and CALVIN environment in the same virtual environment might cause conflict of dependencies.
+We recommend to make two separated virtual environments for D4RL and CALVIN experiments.
 We also note that we utilize dataset provided by [TACO-RL repo](https://github.com/ErickRosete/tacorl) for CALVIN experiments,
 which has slightly different training/validation split.
 
