@@ -129,9 +129,9 @@ class DTAMP(nn.Module):
             neg_goals = torch.zeros_like(batch['g_critic'])
             for i in range(len(batch['g_critic'])):
                 candidates = torch.cat([batch['g_critic'][:i], batch['g_critic'][i + 1:]], dim=0)
-                candidates = candidates.reshape(1, -1, self.goal_dim // 2)
-                distance = (batch['g_critic'][i].unsqueeze(1) - candidates).pow(2).sum(-1)
-                neg_goal_idx = torch.argmin(distance, dim=-1, keepdim=True)
+                candidates = candidates.reshape(-1, self.goal_dim // 2)
+                distance = (batch['g_critic'][i].unsqueeze(1) - candidates.unsqueeze(0)).pow(2).sum(-1)
+                neg_goal_idx = torch.argmin(distance, dim=-1)
                 neg_goals[i] = candidates[neg_goal_idx]
         else:
             neg_goals = torch.cat([batch['g_critic'][1:], batch['g_critic'][:1]], dim=0)
